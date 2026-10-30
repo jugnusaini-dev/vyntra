@@ -1,0 +1,285 @@
+.login-container,
+.login-container * {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.login-container {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 32px 20px;
+  background: #080808;
+  color: #171717;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-card {
+  display: grid;
+  width: min(100%, 750px);
+  height: 400px;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 40%);
+}
+
+.login-form,
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 44px;
+}
+
+.login-form {
+  overflow-y: auto;
+}
+
+.login-form h1 {
+  margin-bottom: 7px;
+  font-size: clamp(1.7rem, 4vw, 2rem);
+}
+
+.login-intro {
+  margin-bottom: 18px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form form > label {
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.login-form form > input {
+  width: 100%;
+  min-height: 40px;
+  margin-bottom: 12px;
+  padding: 0 14px;
+  border: 1px solid #dedede;
+  border-radius: 6px;
+  background: #f7f7f7;
+  color: #171717;
+  font: inherit;
+}
+
+.login-form form > input:focus {
+  border-color: #f04450;
+  outline: 2px solid rgb(240 68 80 / 18%);
+}
+
+.saved-accounts {
+  margin: 0 0 16px;
+}
+
+.saved-accounts h2 {
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+.saved-accounts > p {
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.saved-accounts ul {
+  display: grid;
+  gap: 6px;
+  max-height: 115px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.saved-accounts li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.saved-account {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 9px;
+  padding: 6px;
+  border: 1px solid #e6e6e6;
+  border-radius: 7px;
+  background: #fff;
+  color: #171717;
+  cursor: pointer;
+  text-align: left;
+}
+
+.saved-account.selected,
+.saved-account:hover {
+  border-color: #e63b50;
+  background: #fff7f8;
+}
+
+.saved-account-details {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+  font-size: 0.75rem;
+}
+
+.saved-account-details strong,
+.saved-account-details span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.saved-account-details span {
+  color: #666;
+}
+
+.saved-account-switch-label {
+  margin-left: auto;
+  color: #d92f48;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.saved-account:disabled,
+.forget-account:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.forget-account {
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: #a32638;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.7rem;
+}
+
+.forget-account:hover {
+  text-decoration: underline;
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+  font-size: 0.85rem;
+}
+
+.login-options a,
+.signup-text a {
+  color: #d92f48;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-options a:hover,
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+.login-remember-note {
+  color: #666;
+}
+
+.login-submit {
+  min-height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: #e63b50;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.login-submit:hover {
+  transform: translateY(-1px);
+  background: #c92d42;
+}
+
+.login-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.login-form .auth-error {
+  margin: 0 0 10px;
+  color: #c92d42;
+}
+
+.login-form .auth-success {
+  margin: 0 0 10px;
+  color: #287a58;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.login-submit:focus-visible,
+.login-options a:focus-visible,
+.signup-text a:focus-visible {
+  outline: 3px solid #171717;
+  outline-offset: 3px;
+}
+
+.signup-text {
+  margin-top: 16px;
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.welcome-section {
+  align-items: center;
+  background: linear-gradient(145deg, #ff4654, #ed286a);
+  color: #fff;
+  text-align: center;
+}
+
+.welcome-section h2 {
+  margin-bottom: 12px;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  letter-spacing: 0.04em;
+}
+
+.welcome-section h3 {
+  margin-bottom: 18px;
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+}
+
+.welcome-section p {
+  max-width: 330px;
+  color: rgb(255 255 255 / 88%);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .login-card {
+    height: auto;
+    max-width: 460px;
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-section {
+    min-height: 240px;
+  }
+}

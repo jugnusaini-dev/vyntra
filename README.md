@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Vyntra
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Vyntra is a React social app with a local Node.js HTTP API and SQLite database.
+The API uses Node's built-in HTTP and SQLite modules rather than Express or a
+third-party database package.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- Node.js 22.5 or newer (`node:sqlite` is built into Node).
+- npm
 
-### `npm start`
+## Run locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Install the client dependencies once:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+npm install
+```
 
-### `npm test`
+Start the API and React development server in two terminals:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm run server
+```
 
-### `npm run build`
+```sh
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open [http://localhost:3000](http://localhost:3000). The SQLite database is
+created at `data/vyntra.sqlite` and is intentionally excluded from Git. Set
+`VYNTRA_DB_PATH` to use another database file.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create an account at `/signup`. Passwords are stored as scrypt hashes, and
+login sessions are kept in HttpOnly cookies. Up to three account names can be
+remembered on this device for quick switching; passwords are never stored in
+the browser. Use the account menu to switch accounts, add another account, or
+log out. Logging out revokes the current account's saved session. The API seeds
+a small set of demo creators and posts so the feed is useful on a new
+installation. Demo accounts can be followed and messaged, but do not sign in.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Profile data, posts, likes, comments, follows, messages, and notifications are
+stored in SQLite. Uploaded images are kept as data URLs in the database; the
+API accepts images up to 4 MB.
 
-### `npm run eject`
+## Production deployment
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+npm run build
+npm run start:production
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Configure the hosting provider to run `npm run build` as its build command and
+`npm run start:production` as its start command. The server serves both the
+React app and `/api` routes on the same origin and listens on the port supplied
+by the host. Set `VYNTRA_DB_PATH` to a writable persistent disk location so
+accounts and app data survive restarts and deployments. Use a host that
+supports Node.js 22.5 or newer and persistent storage for SQLite.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deploy behind HTTPS and set `FRONTEND_ORIGIN` to the exact public site origin
+when the host requires explicit origin validation.
